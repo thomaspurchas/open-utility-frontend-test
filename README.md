@@ -1,6 +1,9 @@
 # Open Utility Code Challenge
 
-Thanks for your interest in joining the OU team. Below are a number of tasks for building our highly scientific weather forecasting feature. There are three tasks and an optional provisioning task. Each task should take about 30 mins.
+Thanks for your interest in joining the OU team. Below are a number of tasks
+for building our highly scientific weather forecasting feature. There are four
+tasks and a fifth provisioning task available for extra credit. Each task
+should take about 30 mins.
 
 
 ## Task 1
@@ -21,7 +24,9 @@ Return a response to a GET request
  * /forecast/2017/01/12/ - `"Rain, Sun"`
 
 ## Task 3
-Return a JSON object mapping dates to forecasts in response to POST request of a JSON array of dates.
+
+Return a JSON object mapping dates to forecasts in response to POST request of
+a JSON array of dates.
 
  * Request:
 ~~~~
@@ -29,15 +34,21 @@ Return a JSON object mapping dates to forecasts in response to POST request of a
 ~~~~
  * Response:
 ~~~~
-    {
-      "2017/01/03": "Wind, Sun",
-      "2017/03/14": "Rain",
-      "2017/03/15": "Overcast",
-      "2017/07/24": "Rain, Sun"
-    }
+{
+  "2017/01/03": "Wind, Sun",
+  "2017/03/14": "Rain",
+  "2017/03/15": "Overcast",
+  "2017/07/24": "Rain, Sun"
+}
 ~~~~
 
-## Provisioning (Optional)
+## Task 4
+
+Create and serve an HTML webpage which shows the forecast for the next 10 days.
+The forecast should be loaded via a request to the API from Task 3. Bonus
+points for use of flexbox.
+
+## Provisioning (Additional credits)
 
 Repeatable steps (with instructions) to install all requirements and be able to run any tests or commands. Ideally the solution would work on any platform. The minimum requirement is to work on OSX.
 
