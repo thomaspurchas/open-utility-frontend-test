@@ -6,9 +6,9 @@ Thanks for your interest in joining the OU team. Below are a number of tasks for
 ## Task 1
 
 Write a function which takes a date and returns
- * “Rain” when the date is an even number
- * “Wind” when the date ends in a prime number
- * “Sun” when the date is divisible by 3 or 5, but not both
+ * “Rain” when the day of the month is an even number
+ * “Wind” when the day of the month is a prime number
+ * “Sun” when the day of the month is divisible by 3 or 5, but not both
  * “Overcast” if none of the above
 
 For example “Rain, Sun” for 20th of the month.
