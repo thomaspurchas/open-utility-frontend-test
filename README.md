@@ -1,4 +1,4 @@
-# Open Utility Code Challenge
+# Open Utility Code Challenge :sunny: :partly_sunny: :rainbow:
 
 Thanks for your interest in joining the OU team. Below are a number of tasks
 for building our highly scientific weather forecasting feature. There are four
@@ -48,7 +48,7 @@ Create and serve an HTML webpage which shows the forecast for the next 10 days.
 The forecast should be loaded via a request to the API from Task 3. Bonus
 points for use of flexbox.
 
-## Provisioning (Additional credits)
+## Provisioning \(Additional credits\)
 
 Repeatable steps (with instructions) to install all requirements and be able to run any tests or commands. Ideally the solution would work on any platform. The minimum requirement is to work on OSX.
 
