@@ -16,6 +16,8 @@ class Weather():
 
     Weather('sun') + Weather('rain') == "Sun, Rain"
     Weather('rain') + Weather('sun') == "Sun, Rain"
+
+    Note that I think sun is the most important weather type...
     '''
 
      # Use named tuples to create basic weather types with associated emoji and order
