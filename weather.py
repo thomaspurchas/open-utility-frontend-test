@@ -13,7 +13,7 @@ class Weather():
 
     SUN = WeatherType('Sun', '☀️', 0)
     RAIN = WeatherType('Rain', '🌧️', 1)
-    WINDY = WeatherType('Windy', '💨', 2)
+    WINDY = WeatherType('Wind', '💨', 2)
     CLOUDY = WeatherType('Cloudy', '☁️', 3)
     OVERCAST = WeatherType('Overcast', '⛅️', 4)
 
@@ -29,7 +29,11 @@ class Weather():
     }
 
     def __init__(self, weather):
-        self.weather = {self.weather_mapping[weather.lower()]}
+        if weather is None:
+            self.weather = set()
+        else:
+            self.weather = {self.weather_mapping[weather.lower()]}
+        
 
     def __add__(self, b):
         if b is None:
@@ -51,7 +55,7 @@ class Weather():
 
     @classmethod
     def from_types(cls, weather_types):
-        weather = cls(cls.RAIN.name)
+        weather = cls(None)
         weather.weather = weather_types
         return weather
 
@@ -72,14 +76,14 @@ class Weather():
 
 
 def whats_the_weather_like(date):
-    weather = None
+    weather = Weather(None)
     if date.day % 2 == 0:
         weather += Weather('Rain')
     if date.day in PRIMES:
         weather += Weather('Wind')
-    if (date.month % 3 == 0) != (date.month % 5 == 0):
+    if (date.day % 3 == 0) != (date.day % 5 == 0):
         weather += Weather('Sun')
-    if weather is None:
+    if weather == Weather(None):
         weather = Weather('Overcast')
 
     return weather
@@ -90,6 +94,7 @@ def whats_the_weather_like_from_string(date):
     as a string in YYYY/MM/DD format
     '''
 
-    parsed_datetime = datetime.datetime.strptime('%Y/%m/%d')
+    parsed_datetime = datetime.datetime.strptime(date, '%Y/%m/%d')
 
-    return whats_the_weather_like(parsed_datetime.date())
+    weather = whats_the_weather_like(parsed_datetime.date())
+    return str(weather)

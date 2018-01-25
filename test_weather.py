@@ -1,4 +1,4 @@
-from weather import Weather
+from weather import Weather, whats_the_weather_like, whats_the_weather_like_from_string
 
 def test_names():
     rain = Weather('rain')
@@ -34,3 +34,13 @@ def test_sub():
     assert str(subed) == 'Sun'
     assert subed == sun
 
+def test_date_weather():
+    dates = {
+        '2017/01/07': 'Wind',
+        '2017/01/09': 'Sun',
+        '2017/01/12': 'Sun, Rain',
+        '2017/01/01': 'Overcast'
+    }
+
+    for date, weather in dates.items():
+        assert whats_the_weather_like_from_string(date) == weather
