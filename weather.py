@@ -9,23 +9,35 @@ import prime
 PRIMES = prime.sieve(31)
 
 class Weather():
+    '''
+    Weather object that lets you do some basic weather maths. It provides addition and subtraction
+    operations, addition is commutative, subtraction is not. The basic weather types have fixed order
+    so that string representations of combined weather is always the same e.g.
+
+    Weather('sun') + Weather('rain') == "Sun, Rain"
+    Weather('rain') + Weather('sun') == "Sun, Rain"
+    '''
+
+     # Use named tuples to create basic weather types with associated emoji and order
     WeatherType = namedtuple('WeatherType', ['name', 'emoji', 'order'])
 
     SUN = WeatherType('Sun', '☀️', 0)
     RAIN = WeatherType('Rain', '🌧️', 1)
-    WINDY = WeatherType('Wind', '💨', 2)
-    CLOUDY = WeatherType('Cloudy', '☁️', 3)
+    WIND = WeatherType('Wind', '💨', 2)
+    CLOUD = WeatherType('Cloud', '☁️', 3)
     OVERCAST = WeatherType('Overcast', '⛅️', 4)
 
+    # Create a mapping object so that we can quickly lookup basic weather types
     weather_mapping = {
-        w.name.lower(): w for w in [SUN, RAIN, WINDY, CLOUDY, OVERCAST]
+        w.name.lower(): w for w in [SUN, RAIN, WIND, CLOUD, OVERCAST]
     }
 
+    # Create some emoji weather combination substitutes so emoji is better
     emoji_combinations = {
         '🌈': {RAIN, SUN},
         '☀️🔥😡': {OVERCAST, SUN},
-        '☀️🔥😡': {CLOUDY, SUN},
-        '💨☂️': {RAIN, WINDY}
+        '☀️🔥😡': {CLOUD, SUN},
+        '💨☂️': {RAIN, WIND}
     }
 
     def __init__(self, weather):
@@ -53,16 +65,6 @@ class Weather():
     def __str__(self):
         return ', '.join([w.name for w in self.sorted_weather()])
 
-    @classmethod
-    def from_types(cls, weather_types):
-        weather = cls(None)
-        weather.weather = weather_types
-        return weather
-
-    def sorted_weather(self):
-        return sorted(list(self.weather), key=attrgetter('order'))
-
-    @property
     def emoji(self):
         output = ''
         weather = self.weather.copy()
@@ -73,6 +75,15 @@ class Weather():
         
         output += ''.join([w.emoji for w in weather])
         return output
+
+    @classmethod
+    def from_types(cls, weather_types):
+        weather = cls(None)
+        weather.weather = weather_types
+        return weather
+
+    def sorted_weather(self):
+        return sorted(list(self.weather), key=attrgetter('order'))
 
 
 def whats_the_weather_like(date):

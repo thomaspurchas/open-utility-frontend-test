@@ -14,6 +14,7 @@ def test_commutative():
     weather2 = Weather('rain') + Weather('sun')
 
     assert weather1 == weather2
+    assert str(weather1) == str(weather2)
 
 def test_sum():
     rain = Weather('rain')
@@ -21,7 +22,7 @@ def test_sum():
 
     added = rain + sun
     assert str(added) == 'Sun, Rain'
-    assert added.emoji == '🌈'
+    assert added.emoji() == '🌈'
 
 def test_sub():
     rain = Weather('rain')
