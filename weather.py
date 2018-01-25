@@ -70,3 +70,26 @@ class Weather():
         output += ''.join([w.emoji for w in weather])
         return output
 
+
+def whats_the_weather_like(date):
+    weather = None
+    if date.day % 2 == 0:
+        weather += Weather('Rain')
+    if date.day in PRIMES:
+        weather += Weather('Wind')
+    if (date.month % 3 == 0) != (date.month % 5 == 0):
+        weather += Weather('Sun')
+    if weather is None:
+        weather = Weather('Overcast')
+
+    return weather
+
+def whats_the_weather_like_from_string(date):
+    '''
+    Tells you what the weather is like on a date provided 
+    as a string in YYYY/MM/DD format
+    '''
+
+    parsed_datetime = datetime.datetime.strptime('%Y/%m/%d')
+
+    return whats_the_weather_like(parsed_datetime.date())
