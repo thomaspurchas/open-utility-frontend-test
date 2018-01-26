@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify, abort
 
 from weather import whats_the_weather_like
 
@@ -29,17 +29,32 @@ def forcast(date_string):
 
     return '{}</br>{}'.format(str(weather), weather.emoji())
 
+def get_weather_forcast(dates):
+    response = {}
+    for date in dates:
+        try:
+            response[date] = whats_the_weather_like(parse_date(date))
+        except ValueError:
+            res = jsonify(error="Unable to handle date '{}'".format(date))
+            res.status_code = 400
+            abort(res)
+
+    return response
+
 @app.route('/forcast/', methods=['POST'])
 def forcast_many():
     dates = request.get_json(force=True)
 
-    response = {}
-    for date in dates:
-        try:
-            response[date] = str(whats_the_weather_like(parse_date(date)))
-        except ValueError:
-            res = jsonify(error="Unable to handle date '{}'".format(date))
-            res.status_code = 400
-            return res
+    res = get_weather_forcast(dates)
+    res = {d: str(w) for d, w in res.items()}
 
-    return jsonify(response)
+    return jsonify(res)
+
+@app.route('/forcast/emoji/', methods=['POST'])
+def forcast_many_emoji():
+    dates = request.get_json(force=True)
+
+    res = get_weather_forcast(dates)
+    res = {d: w.emoji() for d, w in res.items()}
+
+    return jsonify(res)

@@ -26,3 +26,15 @@ def test_json_post(client):
         "2017/03/15": "Overcast",
         "2017/07/24": "Sun, Rain"
     }
+
+def test_json_emoji_post(client):
+    data = ["2017/01/03", "2017/03/14", "2017/03/15", "2017/07/24"]
+
+    res = client.post(url_for('forcast_many_emoji'), data=json.dumps(data))
+
+    assert res.json == {
+        "2017/01/03": "☀️💨",
+        "2017/03/14": "🌧️",
+        "2017/03/15": "⛅️",
+        "2017/07/24": "🌈"
+    }
