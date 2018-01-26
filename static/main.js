@@ -23,6 +23,8 @@ function renderCalendar(displayType) {
     var futureDaysThisWeek = 6 - pastDaysThisWeek;
     var startDate = moment(today).day(0);
 
+    var datesToNodes = {};
+
     for (var currentWeek = 0; currentWeek <=4; currentWeek ++) {
         var weekStartDate = moment(startDate);
         weekStartDate.week(weekStartDate.week() + currentWeek);
@@ -40,9 +42,7 @@ function renderCalendar(displayType) {
 
             if (currentDate.isBefore(today)) {
                 dayNode.addClass('past');
-            }
-
-            if (currentDate.isSame(today)) {
+            } else if (currentDate.isSame(today)) {
                 dayNode.addClass('today');
             }
 
@@ -52,11 +52,21 @@ function renderCalendar(displayType) {
                 dayNode.find('header').text(currentDate.format('D'));
             }
 
+            datesToNodes[currentDate.format('YYYY/MM/DD')] = dayNode.find('.day-content');
+
             weekNode.append(dayNode);
         }
 
         $('.weeks').append(weekNode);
     }
+
+    var datesToGet = Object.keys(datesToNodes);
+    $.post('/forcast/', JSON.stringify(datesToGet), "json")
+        .done(function(data) {
+            Object.keys(data).forEach(function(key) {
+                datesToNodes[key].text(data[key]);
+            });
+        });
 }
 
 $(renderCalendar);

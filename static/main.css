@@ -43,6 +43,8 @@ html, body {
 
 .calendar .days-header li {
     flex: 1 0;
+
+    padding-left: 4px;
 }
 
 .calendar .days-header {
@@ -59,7 +61,6 @@ html, body {
 
     display: flex;
     flex-direction: column;
-    margin-bottom: -5px;
     padding-left: 8px;
 }
 
@@ -71,11 +72,16 @@ html, body {
 }
 
 .calendar .day {
-    padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    flex: 1 0; 
+
+    position: relative;
+
     padding-right: 8px;
     padding-left: 0px;
-
-    flex: 1 0;
 }
 
 .calendar .day.weekend {
@@ -94,14 +100,18 @@ html, body {
 .calendar .day.past {
     background: #EEE;
     opacity: 0.5;
-
-    margin-right: 8px;
-    padding-right: 0;
 }
-
+.calendar .day-header-wrapper {
+    position: absolute;
+    top: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
 .calendar .day-header {
     border-top: gray 1px solid;
-    padding: 4px;
+    padding-top: 4px;
 }
 
 .calendar .day-content {
