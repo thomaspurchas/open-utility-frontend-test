@@ -12,8 +12,13 @@ String.prototype.format = String.prototype.f = function() {
 };
 
 function renderCalendar(displayType) {
+    var WEEKS_TEMPLATE = $('#weeks-template').html();
     var WEEK_TEMPLATE = $('#week-template').html();
     var DAY_TEMPLATE = $('#day-template').html();
+    var API = '/forcast/';
+    var EMOJI_API = '/forcast/emoji/';
+
+    var api_url = (displayType == 'emoji' ? EMOJI_API : API);
 
     var today = moment();
     
@@ -24,6 +29,8 @@ function renderCalendar(displayType) {
     var startDate = moment(today).day(0);
 
     var datesToNodes = {};
+
+    var weeksNode = $(WEEKS_TEMPLATE);
 
     for (var currentWeek = 0; currentWeek <=4; currentWeek ++) {
         var weekStartDate = moment(startDate);
@@ -36,7 +43,7 @@ function renderCalendar(displayType) {
 
             var dayNode = $(DAY_TEMPLATE);
 
-            if (currentDate.day() == 0 || currentDate.day() == 6) {
+            if (currentDate.day() === 0 || currentDate.day() == 6) {
                 dayNode.addClass('weekend');
             }
 
@@ -51,17 +58,25 @@ function renderCalendar(displayType) {
             } else {
                 dayNode.find('header').text(currentDate.format('D'));
             }
+            
+            if (displayType == 'emoji') {
+                dayNode.find('.day-content').addClass('emoji');
+            }
 
             datesToNodes[currentDate.format('YYYY/MM/DD')] = dayNode.find('.day-content');
 
             weekNode.append(dayNode);
         }
 
-        $('.weeks').append(weekNode);
+        weeksNode.append(weekNode);
     }
 
+    $('.calendar .weeks').replaceWith(weeksNode);
+    $('.calendar .header.today').text(today.format('MMMM YYYY'));
+
     var datesToGet = Object.keys(datesToNodes);
-    $.post('/forcast/', JSON.stringify(datesToGet), "json")
+
+    $.post(api_url, JSON.stringify(datesToGet), "json")
         .done(function(data) {
             Object.keys(data).forEach(function(key) {
                 datesToNodes[key].text(data[key]);
@@ -69,4 +84,12 @@ function renderCalendar(displayType) {
         });
 }
 
-$(renderCalendar);
+function setup() {
+    renderCalendar($('#displaySelector').val());
+
+    $('#displaySelector').change(function() {
+        renderCalendar($('#displaySelector').val());
+    });
+}
+
+$(setup);

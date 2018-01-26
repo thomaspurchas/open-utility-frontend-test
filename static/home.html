@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="calendar">
-        <header class="header today">January</header>
+        <header class="header today"></header>
         <ul class="days-header">
             <li>Mon</li>
             <li>Tue</li>
@@ -24,9 +24,22 @@
         </ul>
         <div class="weeks">
         </div>
-        <footer class="footer">🌈 ⛅️ ☀️ Much Weather, So Forcast ☀️ ⛅️ 🌈</footer>
+        <footer class="footer">
+            <span></span>
+            <span>🌈 ⛅️ ☀️ Much Weather, So Forcast ☀️ ⛅️ 🌈</span>
+            <span>
+                <select id="displaySelector">
+                    <option value="emoji">Emoji</option>
+                    <option value="text">Text</option>
+                </select>
+            </span>
+        </footer>
     </div>
 
+    <script id="weeks-template" type="text/x-custom-template">
+        <div class="weeks">
+        </div>
+    </script>
     <script id="week-template" type="text/x-custom-template">
         <div class="week">
         </div>
