@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import datetime
 
 from flask import Flask, Response, request, jsonify, abort, render_template
@@ -61,3 +63,6 @@ def forcast_many_emoji():
     res = {d: w.emoji() for d, w in res.items()}
 
     return jsonify(res)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
