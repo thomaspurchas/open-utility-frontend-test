@@ -9,7 +9,7 @@ Docker is the easiest, assuming that you already have [Docker installed](https:/
 From within this repo run:
 
 ```
-docker build -t docker build -t thomas-forecast-challenge .
+docker build -t thomas-forecast-challenge .
 ```
 
 then run:
