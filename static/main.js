@@ -21,12 +21,8 @@ function renderCalendar(displayType) {
     var api_url = (displayType == 'emoji' ? EMOJI_API : API);
 
     var today = moment();
-    
-    // Moment.day() returns DoW with Sunday = 0
-    // We need Sunday = 6
-    var pastDaysThisWeek = (today.day() + 6) % 7;
-    var futureDaysThisWeek = 6 - pastDaysThisWeek;
-    var startDate = moment(today).day(0);
+
+    var startDate = moment(today).weekday(0);
 
     var datesToNodes = {};
 
@@ -39,7 +35,7 @@ function renderCalendar(displayType) {
         var weekNode = $(WEEK_TEMPLATE);
 
         for (var doW = 0; doW < 7; doW++) {
-            var currentDate = moment(weekStartDate).day(doW + 1);
+            var currentDate = moment(weekStartDate).weekday(doW);
 
             var dayNode = $(DAY_TEMPLATE);
 
@@ -90,6 +86,10 @@ function renderCalendar(displayType) {
 }
 
 function setup() {
+    // Set locale to en-gb. That means that local aware weekday stuff will set Monday = 0 rather than Sunday = 0
+    // Also remove any other americanisations 
+    moment.locale('en-gb');
+
     renderCalendar($('#displaySelector').val());
 
     $('#displaySelector').change(function() {
