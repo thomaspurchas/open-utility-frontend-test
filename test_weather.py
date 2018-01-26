@@ -35,6 +35,17 @@ def test_sub():
     assert str(subed) == 'Sun'
     assert subed == sun
 
+def test_weather_priority():
+    sun = Weather('sun')
+    wind = Weather('wind')
+
+    w1 = wind + sun
+    w2 = sun + wind
+    
+    assert str(w1) == str(w2) == 'Sun, Wind'
+    assert w1.emoji() == w2.emoji() == '☀️💨'
+
+
 def test_date_weather():
     dates = {
         '2017/01/07': 'Wind',

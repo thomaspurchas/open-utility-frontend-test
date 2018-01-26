@@ -75,7 +75,7 @@ class Weather():
                 output += emoji
                 weather -= combo
         
-        output += ''.join([w.emoji for w in weather])
+        output += ''.join([w.emoji for w in self.sorted_weather(weather)])
         return output
 
     @classmethod
@@ -84,8 +84,10 @@ class Weather():
         weather.weather = weather_types
         return weather
 
-    def sorted_weather(self):
-        return sorted(list(self.weather), key=attrgetter('order'))
+    def sorted_weather(self, weather=None):
+        if weather is None:
+            weather = self.weather
+        return sorted(list(weather), key=attrgetter('order'))
 
 
 def whats_the_weather_like(date):
