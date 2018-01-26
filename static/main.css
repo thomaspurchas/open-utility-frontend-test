@@ -17,17 +17,11 @@ html, body {
 }
 
 .calendar * {
-    background: white;
-    
     margin: 0;
     padding: 0;
 }
 
-.calendar .weekend, .calendar .weekend * {
-    background: #EEE;
-}
-
-.calendar header {
+.calendar > header {
     text-align: center;
     height: 40px;
     line-height: 40px;
@@ -38,7 +32,7 @@ html, body {
     margin-bottom: 5px;
 }
 
-.calendar footer {
+.calendar > footer {
     border-top: 1px #999 solid;
     height: 30px;
     color: #999;
@@ -47,8 +41,7 @@ html, body {
     line-height: 30px;
 }
 
-.calendar .days-header li, .calendar .day {
-    margin-left: 5px;
+.calendar .days-header li {
     flex: 1 0;
 }
 
@@ -58,6 +51,7 @@ html, body {
 
     list-style: none;
     color: #999;
+    padding-left: 8px;
 }
 
 .calendar .weeks {
@@ -66,6 +60,7 @@ html, body {
     display: flex;
     flex-direction: column;
     margin-bottom: -5px;
+    padding-left: 8px;
 }
 
 .calendar .week {
@@ -76,10 +71,37 @@ html, body {
 }
 
 .calendar .day {
+    padding-bottom: 4px;
+    padding-right: 8px;
+    padding-left: 0px;
+
+    flex: 1 0;
+}
+
+.calendar .day.weekend {
+    background: #EEE;
+}
+
+.calendar .day:last-child {
+    padding-right: 0;
+    margin-right: 8px;
+}
+
+.calendar .day.today .day-header {
+    color: tomato;
+}
+
+.calendar .day.past {
+    background: #EEE;
+    opacity: 0.5;
+
+    margin-right: 8px;
+    padding-right: 0;
+}
+
+.calendar .day-header {
     border-top: gray 1px solid;
-    padding: 2px;
-    padding-right: 4px;
-    padding-left: 4px;
+    padding: 4px;
 }
 
 .calendar .day-content {
