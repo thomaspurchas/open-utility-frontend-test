@@ -81,6 +81,11 @@ function renderCalendar(displayType) {
             Object.keys(data).forEach(function(key) {
                 datesToNodes[key].text(data[key]);
             });
+        })
+        .fail(function() {
+            Object.keys(datesToNodes).forEach(function(key) {
+                datesToNodes[key].text("So Error, Much Fail 😞");
+            });
         });
 }
 

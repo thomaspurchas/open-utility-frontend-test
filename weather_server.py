@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, Response, request, jsonify, abort
+from flask import Flask, Response, request, jsonify, abort, render_template
 
 from weather import whats_the_weather_like
 
@@ -12,8 +12,11 @@ def parse_date(date_string):
     return datetime.datetime.strptime(date_string, DATE_FORMAT)
 
 @app.route("/")
-@app.route("/forcast/")
 def hello():
+    return render_template('hello.html')
+
+@app.route("/forcast/")
+def woops():
     return Response("This is not the weather you're looking for...", status=404)
 
 @app.route('/forcast/<path:date_string>')
