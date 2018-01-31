@@ -16,4 +16,4 @@ def sieve(n):
             prime.append(i)
             for j in range(i*i, n+1, i):
                 not_prime.append(j)
-    return prime
+    return set(prime)
