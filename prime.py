@@ -1,4 +1,14 @@
+"""
+Helper module that provides a prime sieve. Sieve implementation taken
+from:
+https://iamrafiul.wordpress.com/2013/04/28/sieve-of-eratosthenes-in-python/
+"""
+
 def sieve(n):
+    """
+    Calculate all primes up to n and return them in a list
+    """
+
     not_prime = []
     prime = []
     for i in range(2, n+1):
