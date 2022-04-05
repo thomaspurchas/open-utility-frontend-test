@@ -2,7 +2,7 @@
 # https://hub.docker.com/r/frolvlad/alpine-python3/~/dockerfile/
 # https://github.com/docker/labs/blob/master/beginner/flask-app/Dockerfile
 
-FROM alpine:latest
+FROM alpine:3.15.4
 
 RUN apk add --no-cache python3 && \
     python3 -m ensurepip && \
