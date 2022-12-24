@@ -1,3 +1,4 @@
 Flask==0.12.2
 pytest==3.3.2
 pytest-flask==0.10.0
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
